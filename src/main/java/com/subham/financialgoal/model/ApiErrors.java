@@ -1,0 +1,12 @@
+package com.subham.financialgoal.model;
+
+public enum ApiErrors {
+	INVALID_USERNAME,
+	INVALID_USER_GOAL,
+	NULL_USER_GOAL_NAME,
+	USERNAME_AMBIGUITY,
+	DATE_FORMAT,
+	NULL_USERNAME,
+	NULL_DATE_STRING,
+	SERVER_ERROR;
+}

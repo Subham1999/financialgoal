@@ -21,7 +21,7 @@ public class Transaction {
 	private double debit;
 	private boolean successful;
 	private String message;
-	public Transaction(int id, String username, Date date, double credit, double debit, String message, boolean successful) {
+	private Transaction(int id, String username, Date date, double credit, double debit, String message, boolean successful) {
 		this.id = id;
 		this.username = username;
 		this.date = date;
@@ -94,5 +94,50 @@ public class Transaction {
 			return false;
 		Transaction other = (Transaction) obj;
 		return id == other.id;
+	}
+	public static class builder{
+		private int id = 0;
+		private String username; 
+		private Date date = new Date();
+		private double credit = 0;
+		private double debit = 0;
+		private boolean successful;
+		private String message;
+		private boolean isCredit = false;
+		
+		public builder successful() {
+			successful = true;
+			return this;
+		}
+		
+		public builder failed() {
+			successful = false;
+			return this;
+		}
+		
+		public builder username(String username) {
+			this.username = username;
+			return this;
+		}
+		
+		public builder message(String message) {
+			this.message = message;
+			return this;
+		}
+		
+		public builder credit(double credit) {
+			this.credit = credit;
+			this.isCredit = true;
+			return this;
+		}		
+		
+		public builder debit(double debit) {
+			if (!isCredit) this.debit = debit;
+			return this;
+		}
+		
+		public Transaction build() {
+			return new Transaction(id, username, date, credit, debit, message, successful);
+		}
 	}
 }

@@ -31,7 +31,7 @@ public class FinancialGoal {
 
 	
 	
-	public FinancialGoal(int id, String username, String name, double amount, double saving, Date created,
+	private FinancialGoal(int id, String username, String name, double amount, double saving, Date created,
 			Date deadline, Date completed, boolean status) {
 		this.id = id;
 		this.username = username;
@@ -123,5 +123,50 @@ public class FinancialGoal {
 		return "FinancialGoal [id=" + id + ", username=" + username + ", name=" + name + ", amount=" + amount
 				+ ", saving=" + saving + ", created=" + created + ", deadline=" + deadline + ", completed=" + completed
 				+ ", status=" + status + "]";
+	}
+	
+	public static class builder {
+		/*
+		 * required username(string), name(string), deadline(date);
+		 * amount will be set to 0(by default)
+		*/
+		private String username = null;
+		private String name = null;
+		private double amount = 0;
+		private double saving = 0;
+		private Date created = new Date();
+		private Date deadline = null;
+		private Date completed = null;
+		private boolean status = false;
+		
+		public builder username(String username) {
+			this.username = username;
+			return this;
+		}
+		
+		public builder name(String name) {
+			this.name = name;
+			return this;
+		}
+		
+		public builder amount(double amount) {
+			this.amount = amount;
+			return this;
+		}
+		
+		public builder deadline(Date deadline) {
+			this.deadline = deadline;
+			return this;
+		}
+		
+		public FinancialGoal build() {
+			System.out.println(username + ", " + name + ", " + deadline);
+			if (username == null || name == null || deadline == null) {
+				return null;
+			} else {
+				return new FinancialGoal(0, username, name, amount, saving, created, deadline, completed, status);
+			}
+		}
+		
 	}
 }
